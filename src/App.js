@@ -16,9 +16,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      categories: [],
-      products: [],
-      selectedCategory: ""
+      categories: []
     }
   }
 
@@ -45,13 +43,6 @@ export default class App extends React.Component {
         <div>
           <nav>
             <ul>
-              {
-                this.state.categories.map((category, index)=>{
-                  return (<li key ={index}>
-                  <Link  to={`/Category/?category=${category}`}>{category}</Link>
-                </li>)
-                })
-              }
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -61,6 +52,13 @@ export default class App extends React.Component {
               <li>
                 <Link to="/contact">Contact</Link>
               </li>
+              {
+                this.state.categories.map((category, index)=>{
+                  return (<li key ={index}>
+                  <Link  to={`/Category/${category}`}>{category}</Link>
+                </li>)
+                })
+              }
             </ul>
           </nav>
 
@@ -70,7 +68,7 @@ export default class App extends React.Component {
             <Route path="/contact" element={<Contact />} />
             {
                 this.state.categories.map((category, index)=>{
-                  return (<Route path="/Category/" element={<Category name={category} />} />)
+                  return (<Route path="/Category/:id" element={<Category name={category} />} />)
                 })
               }
           </Routes>
